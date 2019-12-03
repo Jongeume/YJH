@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.yjh.lecture.dao">
+	<insert id="insert" parameterType="L_memberVO">
+		insert into L_MEMBER
+		values
+		(L_MEMBER_M_NO_seq.nextval, #{ID}, #{PASSWORD}, #{NAME},
+		#{NICKNAME}, #{GENDER}, #{BIRTH}, #{PHONE}, SYSDATE,
+		#{USE},#{ZIPCODE},#{ADDR1},#{ADDR2})
+	</insert>
+
+	<select id="selectByIdx" parameterType="int"
+		resultType="L_memberVO">
+		select * from L_MEMBER where M_NO=#{M_NO}
+	</select>
+
+	<update id="update" parameterType="L_memberVO">
+		update L_MEMBER set
+		NAME=#{NAME},
+		NICKNAME=#{NICKNAME},
+		PHONE=#{PHONE},
+		ZIPCODE=#{ZIPCODE},
+		ADDR1=#{ADDR1},
+		ADDR2=#{ADDR2}
+		where M_NO=#{M_NO}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from L_MEMBER where
+		M_NO=#{M_NO}
+	</delete>
+
+	<select id="selectList" resultType="L_memberVO">
+		select * from L_MEMBER order by
+		M_NO desc
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from L_MEMBER
+	</select>
+
+	<select id="selectByUserId" parameterType="java.util.HashMap"
+		resultType="L_memberVO">
+		select * from L_MEMBER where ID=#{ID}
+	</select>
+
+	<select id="selectByUserName" parameterType="java.util.HashMap"
+		resultType="L_memberVO">
+		select * from L_MEMBER where NAME=#{NAME} and
+		phone=#{PHONE}
+	</select>
+
+	<update id="updateUse" parameterType="java.util.HashMap">
+		update L_MEMBER set
+		USE=#{USE} where ID=#{ID}
+	</update>
+
+	<update id="updatePassword" parameterType="java.util.HashMap">
+		update L_MEMBER set
+		PASSWORD=#{PASSWORD} where ID=#{ID}
+	</update>
+
+</mapper>
